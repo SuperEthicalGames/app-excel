@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a2b">
+  <title>Simulación guiada · Admin Financiero</title>
+  <link rel="stylesheet" href="/simulacion.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Volver al administrador"><span class="brand-mark">F</span><span>finanzas<span class="brand-dot">.</span><small>ADMINISTRADOR LOCAL</small></span></a>
+    <div class="top-actions"><span class="demo-chip"><i></i> ENTORNO DE DEMOSTRACIÓN</span><a class="back-link" href="/">← Volver al administrador</a></div>
+  </header>
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> RECORRIDO COMPLETO · 7 ETAPAS</div>
+        <h1>De un documento<br><em>a un Excel listo.</em></h1>
+        <p>Observa cómo se configura una empresa de ejemplo, se revisan documentos, se registran operaciones y se prepara el libro con reportes.</p>
+        <div class="hero-actions"><button class="primary-button" id="startButton">Iniciar simulación <span>→</span></button><span class="safe-label"><span>✓</span> No modifica tu libro real</span></div>
+      </div>
+      <aside class="hero-preview">
+        <div class="preview-top"><span class="file-glyph">▦</span><div><strong>Sistema financiero</strong><small>Vista de la simulación</small></div><span class="ready-pill"><i></i> LISTO</span></div>
+        <div class="preview-chart"><div class="chart-label"><span>Ingresos</span><strong>$4,8 M</strong></div><div class="bars"><i style="height:30%"></i><i style="height:48%"></i><i style="height:38%"></i><i style="height:70%"></i><i style="height:53%"></i><i class="active" style="height:92%"></i><i style="height:62%"></i><i style="height:78%"></i><i style="height:45%"></i><i style="height:68%"></i><i style="height:82%"></i><i style="height:57%"></i></div><div class="chart-months"><span>ENE</span><span>ABR</span><span>AGO</span><span>DIC</span></div></div>
+        <div class="preview-foot"><span><b>28</b> hojas y reportes</span><span class="preview-sep"></span><span><b>0</b> datos reales</span></div>
+      </aside>
+    </section>
+
+    <section class="walkthrough panel" aria-live="polite">
+      <div class="walk-head"><div><div class="eyebrow muted-eyebrow">SIMULACIÓN INTERACTIVA</div><h2 id="stepTitle">El recorrido, de principio a fin</h2></div><div class="step-counter" id="stepCounter">LISTO PARA INICIAR</div></div>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <nav class="step-nav" id="stepNav" aria-label="Etapas de la simulación"></nav>
+      <article class="step-content" id="stepContent">
+        <div class="welcome-card"><div class="welcome-icon">✦</div><div><strong>Usaremos una empresa y documentos completamente ficticios.</strong><p>La simulación recorre configuración, lectura de soportes, controles, registro de operaciones y reportes. Al final tendrás un archivo Excel basado en el libro del sistema.</p></div></div>
+        <div class="start-summary"><span><b>3</b> terceros</span><span><b>6</b> documentos</span><span><b>5</b> movimientos</span><span><b>1</b> documento enviado a revisión</span></div>
+      </article>
+      <div class="walk-footer"><span class="walk-note" id="walkNote">Puedes avanzar etapa por etapa y volver atrás cuando quieras.</span><div class="walk-controls"><button class="secondary-button" id="prevButton" disabled>← Anterior</button><button class="primary-button" id="nextButton">Comenzar <span>→</span></button></div></div>
+    </section>
+
+    <section class="pipeline panel">
+      <div class="pipeline-heading"><div><div class="eyebrow muted-eyebrow">QUÉ INCLUYE EL LIBRO FINAL</div><h2>La simulación termina en un Excel utilizable</h2></div><span class="template-tag">PLANTILLA FINANCIERA · 2026</span></div>
+      <div class="included-grid"><div><span class="include-icon blue">▤</span><strong>Configuración y datos</strong><p>Empresa demo, parámetros, catálogos, terceros, documentos, movimientos, pagos y cobros.</p></div><div><span class="include-icon green">↗</span><strong>Reportes y fórmulas</strong><p>Dashboard, flujo de caja, cartera, cuentas por pagar y reportes mensuales/anuales.</p></div><div><span class="include-icon amber">✓</span><strong>Auditoría y revisión</strong><p>Registro de actividad y un soporte de baja confianza que queda pendiente de revisión.</p></div></div>
+      <div class="tax-note"><span>i</span><p>Los datos no son reales. La simulación deja impuestos y retenciones sin liquidar: deben configurarse y validarse para cada empresa y su normativa vigente.</p></div>
+    </section>
+    <footer class="page-footer">Demostración local · no carga archivos, no llama servicios externos y no cambia el libro activo.</footer>
+  </main>
+  <script src="/simulacion.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+app/data/
+dist/*.ndjson
+dist/*_candidate.xlsx

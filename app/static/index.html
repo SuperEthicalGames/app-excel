@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2b">
+  <title>Admin Financiero</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">F</div>
+        <div><div class="brand-name">finanzas<span>.</span></div><div class="brand-caption">ADMINISTRADOR LOCAL</div></div>
+      </div>
+
+      <div class="workspace-label">ESPACIO DE TRABAJO</div>
+      <button class="book-switch" id="sidebarBookButton" title="Seleccionar otro libro">
+        <span class="book-icon">▤</span><span class="book-name" id="sidebarBook">Cargando libro…</span><span class="chevron">⌄</span>
+      </button>
+
+      <div class="nav-label">GESTIÓN</div>
+      <nav class="nav-list" aria-label="Navegación principal">
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">◫</span><span>Resumen</span></button>
+        <button class="nav-item" data-view="assistant"><span class="nav-icon sparkle">✳</span><span>Asistente IA</span><span class="nav-badge">LOCAL</span></button>
+        <button class="nav-item" data-view="movement"><span class="nav-icon">↕</span><span>Movimientos</span></button>
+        <button class="nav-item" data-view="document"><span class="nav-icon">▧</span><span>Documentos</span></button>
+        <button class="nav-item" data-view="third_party"><span class="nav-icon">♙</span><span>Terceros</span></button>
+        <button class="nav-item" data-view="account"><span class="nav-icon">▱</span><span>Cuentas</span></button>
+        <button class="nav-item" data-view="category"><span class="nav-icon">☷</span><span>Categorías</span></button>
+        <button class="nav-item" data-view="rule"><span class="nav-icon">⌘</span><span>Reglas del asistente</span></button>
+        <button class="nav-item" data-view="logs"><span class="nav-icon">◷</span><span>Registro de actividad</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="local-card">
+          <div class="local-card-top"><span class="status-dot" id="aiDot"></span><span id="aiStatus">Revisando IA local</span></div>
+          <div class="model-name" id="aiModel">Ollama</div>
+          <div class="local-note">Tus datos permanecen en este equipo.</div>
+        </div>
+        <div class="profile">
+          <div class="avatar">A</div><div class="profile-copy"><strong>Administrador</strong><span>Sesión local</span></div>
+          <button class="more-button" id="helpButton" aria-label="Ayuda">?</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Finanzas</span><span class="crumb-slash">/</span><strong id="breadcrumb">Resumen</strong></div>
+        <div class="topbar-actions">
+          <div class="secure-pill"><span class="secure-lock">⌑</span> Solo en este equipo</div>
+          <a class="button button-outline" href="/simulacion.html">▷ Ver simulación</a>
+          <button class="button button-quiet" id="changeBookButton"><span>▤</span> Cambiar libro</button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="view active" id="view-dashboard">
+          <div class="welcome-row">
+            <div><div class="eyebrow">PANEL DE CONTROL</div><h1>Hola, administrador</h1><p class="muted">Aquí tienes lo más importante de tu operación.</p></div>
+            <div class="date-chip"><span class="calendar-icon">▦</span><span id="todayLabel"></span></div>
+          </div>
+
+          <div class="command-card">
+            <div class="command-head"><div class="ai-orb">✳</div><div><div class="command-title">¿Qué necesitas hacer?</div><div class="command-hint">Pídeselo al asistente con tus palabras. Te mostrará los cambios antes de guardarlos.</div></div><span class="local-tag"><i></i> IA LOCAL</span></div>
+            <form class="command-form" id="quickForm">
+              <textarea id="quickInput" rows="1" placeholder="Ej.: registra un gasto de 120.000 por arriendo, pendiente" aria-label="Escribe una solicitud para el asistente"></textarea>
+              <button class="send-button" type="submit" aria-label="Enviar solicitud">↑</button>
+            </form>
+            <div class="prompt-examples"><span>Prueba con:</span><button type="button" data-prompt="Registra un gasto de 120000 por arriendo, pendiente">Registrar gasto</button><button type="button" data-prompt="Busca el movimiento de arriendo más reciente y muéstrame sus datos">Buscar movimiento</button><button type="button" data-prompt="Crea un proveedor llamado Proveedor Demo">Crear proveedor</button></div>
+          </div>
+
+          <div class="section-heading"><div><h2>Resumen del periodo</h2><span class="section-subtitle" id="periodLabel">Este mes</span></div><button class="text-button" data-go="movement">Ver movimientos <span>→</span></button></div>
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-top"><span>Ingresos pagados</span><span class="metric-icon green">↗</span></div><strong id="metricIncome">$0</strong><small>En el periodo actual</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Gastos pagados</span><span class="metric-icon amber">↘</span></div><strong id="metricExpenses">$0</strong><small>En el periodo actual</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Flujo neto</span><span class="metric-icon blue">⇄</span></div><strong id="metricNet">$0</strong><small>Ingresos menos gastos</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Pendiente por cobrar</span><span class="metric-icon violet">◷</span></div><strong id="metricReceivable">$0</strong><small id="metricPayableLabel">Por pagar: $0</small></article>
+          </div>
+
+          <div class="dashboard-lower">
+            <section class="panel recent-panel">
+              <div class="panel-heading"><div><h2>Movimientos recientes</h2><p>Actividad registrada en tu libro</p></div><button class="icon-button" data-go="movement" aria-label="Abrir movimientos">↗</button></div>
+              <div class="table-scroll"><table class="data-table compact" id="recentTable"><thead></thead><tbody><tr><td class="empty-cell">Cargando movimientos…</td></tr></tbody></table></div>
+            </section>
+            <section class="panel health-panel">
+              <div class="panel-heading"><div><h2>Documentos</h2><p>Estado de los soportes</p></div><span class="document-icon">▧</span></div>
+              <div class="doc-stats"><div><span class="stat-dot amber-dot"></span><span>Pendientes de revisión</span><strong id="pendingDocs">0</strong></div><div><span class="stat-dot red-dot"></span><span>Con error</span><strong id="errorDocs">0</strong></div><div><span class="stat-dot blue-dot"></span><span>Registrados</span><strong id="registeredDocs">0</strong></div></div>
+              <button class="button button-outline full-width" data-go="document">Revisar documentos <span>→</span></button>
+              <div class="backup-note"><span>✓</span> La app guarda una copia de seguridad antes de cada cambio.</div>
+            </section>
+          </div>
+          <div class="excel-note"><span class="note-icon">i</span><span>Antes de confirmar cambios, cierra este libro en Excel para evitar ediciones simultáneas.</span></div>
+        </section>
+
+        <section class="view" id="view-assistant">
+          <div class="page-heading"><div><div class="eyebrow">ADMINISTRACIÓN EN LENGUAJE NATURAL</div><h1>Asistente IA</h1><p class="muted">Describe lo que necesitas. La IA local preparará una propuesta para que la revises.</p></div><span class="large-local-tag"><i></i> PROCESAMIENTO LOCAL</span></div>
+          <div class="assistant-layout">
+            <section class="panel chat-panel">
+              <div class="chat-topline"><div class="chat-heading"><div class="chat-orb">✳</div><div><strong>Admin Finanzas</strong><span id="chatModelLine">Asistente local listo para ayudarte</span></div></div><div class="chat-tools"><select id="conversationSelect" aria-label="Conversaciones guardadas"><option value="">Historial de conversaciones</option></select><button class="clear-chat" id="clearChat">＋ Nuevo chat</button><button class="delete-chat" id="deleteConversation" title="Eliminar esta conversación" aria-label="Eliminar esta conversación">×</button></div></div>
+              <div class="chat-messages" id="chatMessages"><div class="message assistant-message"><div class="message-avatar">✳</div><div class="message-body"><strong>Asistente</strong><p>Puedo ayudarte a crear o editar movimientos, documentos, terceros, cuentas, categorías y reglas. También puedo buscar registros. Siempre verás los cambios antes de guardarlos.</p><div class="message-examples"><button data-prompt="Registra un gasto de 120000 por arriendo, pendiente">Registrar un gasto</button><button data-prompt="Crea un proveedor llamado Proveedor Demo">Crear un tercero</button></div></div></div></div>
+              <form class="chat-composer" id="chatForm"><textarea id="chatInput" rows="1" placeholder="Escribe una solicitud…" aria-label="Solicitud para el asistente"></textarea><button class="send-button" type="submit" aria-label="Enviar">↑</button></form>
+              <div class="chat-disclaimer">La IA puede equivocarse. Revisa fechas, valores y terceros antes de confirmar.</div>
+            </section>
+            <aside class="panel assistant-side"><div class="side-section-title">QUÉ PUEDE HACER</div><div class="capability"><span class="cap-icon mint">＋</span><div><strong>Crear registros</strong><p>Movimientos, documentos, terceros y más.</p></div></div><div class="capability"><span class="cap-icon lilac">✎</span><div><strong>Editar información</strong><p>Busca el registro y prepara cambios puntuales.</p></div></div><div class="capability"><span class="cap-icon sand">⌕</span><div><strong>Ayudarte a encontrar</strong><p>Consulta actividad reciente y datos del libro.</p></div></div><div class="side-divider"></div><div class="memory-heading"><div class="side-section-title">MEMORIA DE ESTE LIBRO</div><span id="memoryCount">0</span></div><div id="memoryList" class="memory-list"><p class="memory-empty">Puedes decir «recuerda que…». Revisarás cada memoria antes de guardarla.</p></div><div class="side-divider"></div><div class="side-section-title">PRIVACIDAD</div><div class="privacy-note"><span>◉</span><p>Conversaciones y memorias aprobadas se guardan localmente y se separan por libro. Ollama procesa los mensajes en este equipo.</p></div><div class="model-card"><span class="status-dot" id="assistantAiDot"></span><div><strong id="assistantAiStatus">Comprobando conexión</strong><small id="assistantAiModel">Modelo local</small></div></div></aside>
+          </div>
+          <div class="excel-note"><span class="note-icon">i</span><span>Las propuestas se guardan en el libro solo después de que pulses “Confirmar cambios”.</span></div>
+        </section>
+
+        <section class="view" id="view-data">
+          <div class="page-heading data-heading"><div><div class="eyebrow" id="tableEyebrow">DATOS DEL SISTEMA</div><h1 id="tableTitle">Movimientos</h1><p class="muted" id="tableDescription">Consulta y administra la información del libro.</p></div><button class="button button-primary" id="newRecord"><span>＋</span> Nuevo registro</button></div>
+          <section class="panel table-panel"><div class="table-toolbar"><div class="search-box"><span>⌕</span><input id="tableSearch" type="search" placeholder="Buscar en este módulo…"></div><div class="table-toolbar-right"><span class="row-count" id="rowCount">0 registros</span><button class="button button-outline" id="editRecord" disabled>Editar seleccionado</button><button class="button button-quiet" id="refreshTable">↻</button></div></div><div class="table-scroll"><table class="data-table" id="moduleTable"><thead></thead><tbody></tbody></table></div><div class="table-footer"><span id="tableFooterText">Los cambios se guardan en el libro Excel seleccionado.</span><span class="safe-save">✓ Copia de seguridad automática</span></div></section>
+          <div class="excel-note"><span class="note-icon">i</span><span>Los campos calculados, como el total de un movimiento, los administra el libro y no se pueden sobrescribir.</span></div>
+        </section>
+
+        <section class="view" id="view-logs">
+          <div class="page-heading"><div><div class="eyebrow">TRAZABILIDAD</div><h1>Registro de actividad</h1><p class="muted">Cambios que la app ha guardado en la hoja LOG.</p></div><button class="button button-quiet" id="refreshLogs">↻ Actualizar</button></div>
+          <section class="panel table-panel"><div class="table-scroll"><table class="data-table" id="logTable"><thead></thead><tbody></tbody></table></div></section>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="modal" id="recordModal"><form method="dialog" id="recordForm"><div class="modal-head"><div><div class="eyebrow">EDICIÓN MANUAL</div><h2 id="modalTitle">Nuevo registro</h2></div><button class="modal-close" value="cancel" formnovalidate aria-label="Cerrar">×</button></div><div class="modal-body" id="formFields"></div><div class="modal-foot"><span class="modal-hint">Se guardará una copia de seguridad.</span><div><button class="button button-quiet" value="cancel" formnovalidate>Cancelar</button><button class="button button-primary" id="saveRecord" value="default">Guardar cambios</button></div></div></form></dialog>
+  <dialog class="modal preview-modal" id="planModal"><div class="modal-head"><div><div class="eyebrow">REVISIÓN ANTES DE GUARDAR</div><h2>Confirma esta propuesta</h2></div><button class="modal-close" id="closePlan" aria-label="Cerrar">×</button></div><div class="modal-body"><p class="preview-intro" id="planReply"></p><div id="planAssumptions"></div><div id="planActions"></div><div id="planMemories"></div><div class="preview-warning"><span>!</span><span>Solo se aplicará lo que confirmes. Los cambios de Excel quedan en el registro de actividad; las preferencias se guardan en la memoria local de este libro.</span></div></div><div class="modal-foot"><span class="modal-hint">El libro debe estar cerrado en Excel para guardar movimientos.</span><div><button class="button button-quiet" id="cancelPlan">Cancelar</button><button class="button button-primary" id="applyPlan">Confirmar propuesta</button></div></div></dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>
